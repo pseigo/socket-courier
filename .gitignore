@@ -4,7 +4,8 @@
 
 ### C++ ###
 # Binaries
-bin/
+bin*/
+build*/
 
 # Prerequisites
 *.d
@@ -140,4 +141,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,windows,linux,macos,elixir,cmake
-
