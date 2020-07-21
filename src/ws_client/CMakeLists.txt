@@ -1,35 +1,26 @@
-cmake_minimum_required(VERSION 3.13..3.18)
+cmake_minimum_required(VERSION 3.18)
 
-project(ws_client
+project(WsClient
         VERSION 0.0.1
-        DESCRIPTION "Cross-platform desktop client for testing WebSocket connections"
+        DESCRIPTION "A wrapper around IXWebSocket"
         HOMEPAGE_URL "https://github.com/pseigo/socket-courier"
         LANGUAGES CXX)
 
-### Require out-of-source builds
-file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
-if(EXISTS "${LOC_PATH}")
-    message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
-endif()
+###
+### Variables
+###
+set(SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/connection.cpp)
+set(HEADER_FILES ${SOCKETCOURIER_INCLUDE_DIR}/connection.hpp)
 
-# Compiler flags... a lot of ways of doing the same thing?
-set_target_properties(${PROJECT_NAME} PROPERTIES
-                      CXX_STANDARD 11)
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
-if (UNIX)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
-endif()
+###
+### Define library target
+###
+add_library(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-# Find libraries
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib")
-find_package(ixwebsocket REQUIRED)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${SOCKETCOURIER_INCLUDE_DIR})
 
-# Define executable target
-include_directories(${websocketpp_INCLUDE_DIRS})
-# add_library(websocket_client STATIC src/websocket_client/x.cpp src/websocket_client/x.h)
-add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_libraries(${PROJECT_NAME} websocket_client_LIBS ${_LIBS})
+target_compile_options(${PROJECT_NAME} PRIVATE -Werror -Wall -Wextra -pedantic)
 
-# not sure why this is necessary or what it does
-# apparently installs our binary into the bin directory of the install directory
-install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+# Dependencies
+target_link_libraries(${PROJECT_NAME} PRIVATE ixwebsocket)
