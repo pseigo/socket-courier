@@ -1,1 +1,1 @@
-cmake -B bin -DUSE_TLS=1
+cmake -B bin -DCMAKE_BUILD_TYPE=DEBUG -DUSE_TLS=1 

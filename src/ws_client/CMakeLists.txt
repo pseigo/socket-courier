@@ -3,8 +3,12 @@ cmake_minimum_required(VERSION 3.18)
 project(WsClient
         VERSION 0.0.1
         DESCRIPTION "A wrapper around IXWebSocket"
-        HOMEPAGE_URL "https://github.com/pseigo/socket-courier"
+        HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
         LANGUAGES CXX)
+
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
 
 ###
 ### Variables

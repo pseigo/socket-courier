@@ -28,10 +28,8 @@ int main()
     ws_client::Connection c;
     c.hello_world();
 
-#ifdef _WIN32
     // Only needed once
-    ix:initNetSystem();
-#endif
+    ix::initNetSystem();
 
     ix::WebSocket ws;
 
@@ -67,7 +65,5 @@ int main()
 
     ws.stop();
 
-#ifdef _WIN32
-    ix:uninitNetSystem();
-#endif
+    ix::uninitNetSystem();
 }

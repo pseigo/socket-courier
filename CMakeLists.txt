@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.18)
 
+set(SOCKET_COURIER_HOMEPAGE_URL "https://github.com/pseigo/socket-courier")
+
 project(SocketCourier
         VERSION 0.0.1
         DESCRIPTION "Cross-platform desktop client for testing WebSocket connections"
-        HOMEPAGE_URL "https://github.com/pseigo/socket-courier"
+        HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
         LANGUAGES CXX)
 
 # Public header files
