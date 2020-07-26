@@ -3,10 +3,11 @@ cmake_minimum_required(VERSION 3.18)
 set(SOCKET_COURIER_HOMEPAGE_URL "https://github.com/pseigo/socket-courier")
 
 project(SocketCourier
-        VERSION 0.0.1
-        DESCRIPTION "Cross-platform desktop client for testing WebSocket connections"
-        HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
-        LANGUAGES CXX)
+  VERSION 0.0.1
+  DESCRIPTION "Cross-platform desktop client for testing WebSocket connections"
+  HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
+  LANGUAGES CXX
+)
 
 # Public header files
 set(SOCKETCOURIER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/socket_courier)
@@ -14,7 +15,7 @@ set(SOCKETCOURIER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/socket_courier
 # Require out-of-source builds
 file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
 if(EXISTS "${LOC_PATH}")
-    message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
+  message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
 endif()
 
 # Only run if this is the main project (i.e., not added via add_subdirectory)
@@ -54,10 +55,11 @@ FetchContent_MakeAvailable(doctest)
 ###
 add_subdirectory(src/ws_client)
 add_subdirectory(src/socket_courier_cli)
+add_subdirectory(src/socket_courier_gui)
 
 ###
 ### Test suite
 ###
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
-    add_subdirectory(test/ws_client)
+  add_subdirectory(test/ws_client)
 endif()

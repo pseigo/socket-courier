@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.18)
 
 project(SocketCourierCli
-        VERSION 0.0.1
-        DESCRIPTION "Barebones command line WebSocket client"
-        HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
-        LANGUAGES CXX)
+  VERSION 0.0.1
+  DESCRIPTION "Barebones command line WebSocket client"
+  HOMEPAGE_URL ${SOCKET_COURIER_HOMEPAGE_URL}
+  LANGUAGES CXX
+)
 
 ###
 ### Define executable target
